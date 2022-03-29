@@ -22,7 +22,7 @@ export const useMount = (callBack: () => void) => {
 };
 
 // 防抖 hook
-export const useDebounce = (value: any, delay: number) => {
+export const useDebounce = <V>(value: V, delay: number) => {
   const [resValue, setResValue] = useState(value);
   useEffect(() => {
     // 在每一次 value 变化的时候创建一个定时器，定时器里在 delay 后设置最终值
