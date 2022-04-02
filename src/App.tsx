@@ -2,13 +2,13 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import ProjectListScreen from "./screens/projectList/index";
-// import Test from "screens/Test";
+import LoginView from "screens/login";
 
 function App() {
   return (
     <div className="App">
-      <ProjectListScreen />
-      {/* <Test /> */}
+      {/* <ProjectListScreen /> */}
+      <LoginView />
     </div>
   );
 }
