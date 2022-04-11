@@ -12,6 +12,7 @@ export interface IUser {
   email: string;
   title: string;
   organization: string;
+  token: string;
 }
 
 export interface IList {
