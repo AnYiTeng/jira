@@ -1,5 +1,4 @@
 import React, { FormEvent } from "react";
-import { login } from "auth-provider";
 import { useAuth } from "context/auth-context";
 
 export default function LoginView() {
@@ -16,12 +15,6 @@ export default function LoginView() {
 
   return (
     <form onSubmit={handleSubmit}>
-      {user ? (
-        <div>
-          <p>登录成功</p>
-          <p>{user.name}</p>
-        </div>
-      ) : null}
       <div>
         <label htmlFor="username">用户名</label>
         <input type="text" id={"username"} />
