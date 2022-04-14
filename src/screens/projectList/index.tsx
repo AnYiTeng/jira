@@ -44,8 +44,8 @@ export default function ProjectListScreen() {
 
   return (
     <>
-      <List users={users} list={list} />
       <SearchPanel users={users} params={params} setParams={setParams} />
+      <List users={users} list={list} />
     </>
   )
 }

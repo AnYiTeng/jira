@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { IUser } from "./index";
+import { IUser } from './index'
+import { Input, Select } from 'antd'
 
 interface IProps {
-  users: IUser[];
+  users: IUser[]
   params: {
-    name: string;
-    personId: string;
-  };
-  setParams: (T: IProps["params"]) => void;
+    name: string
+    personId: string
+  }
+  setParams: (T: IProps['params']) => void
 }
 
 export default function SearchPanel(props: IProps) {
-  const { users, params, setParams } = props;
+  const { users, params, setParams } = props
 
   return (
     <form>
       <div>
-        <input
+        <Input
           type="text"
           value={params?.name}
           onChange={(e) =>
@@ -26,25 +26,25 @@ export default function SearchPanel(props: IProps) {
             })
           }
         />
-        <select
+        <Select
           value={params?.personId}
-          onChange={(e) =>
+          onChange={(value) =>
             setParams({
               ...params,
-              personId: e.target.value,
+              personId: value,
             })
           }
         >
-          <option value={""}>负责人</option>
+          <Select.Option value={''}>负责人</Select.Option>
           {users?.map((user) => {
             return (
-              <option key={user.id} value={user.id}>
+              <Select.Option key={user.id} value={user.id}>
                 {user.name}
-              </option>
-            );
+              </Select.Option>
+            )
           })}
-        </select>
+        </Select>
       </div>
     </form>
-  );
+  )
 }
