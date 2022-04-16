@@ -1,5 +1,6 @@
 import { useAuth } from 'context/auth-context'
 import { Form, Button, Input } from 'antd'
+import { LongButton } from 'unauthenticated-app'
 
 export default function RegisterView() {
   const { register, user } = useAuth()
@@ -22,9 +23,9 @@ export default function RegisterView() {
       >
         <Input placeholder="请输入密码" type="password" id={'password'} />
       </Form.Item>
-      <Button htmlType="submit" type="primary">
+      <LongButton htmlType="submit" type="primary">
         注册
-      </Button>
+      </LongButton>
     </Form>
   )
 }
