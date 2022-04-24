@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { cleanObject, useMount, useDebounce } from 'utils'
 import List from './List'
 import SearchPanel from './SearchPanel'
-import qs from 'qs'
+import styled from '@emotion/styled'
 import { useHttp } from 'utils/http'
 
 export interface IUser {
@@ -10,7 +10,6 @@ export interface IUser {
   name: string
   email: string
   title: string
-  organization: string
   token: string
 }
 
@@ -18,6 +17,8 @@ export interface IList {
   id: string
   name: string
   personId: string
+  organization: string
+  created: number
 }
 
 export default function ProjectListScreen() {
@@ -43,9 +44,14 @@ export default function ProjectListScreen() {
   })
 
   return (
-    <>
+    <Container>
+      <h1>项目列表 </h1>
       <SearchPanel users={users} params={params} setParams={setParams} />
       <List users={users} list={list} />
-    </>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  padding: 3.2rem;
+`

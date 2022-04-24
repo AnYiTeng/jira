@@ -1,5 +1,5 @@
 import { IUser } from './index'
-import { Input, Select } from 'antd'
+import { Input, Select, Form } from 'antd'
 
 interface IProps {
   users: IUser[]
@@ -14,9 +14,10 @@ export default function SearchPanel(props: IProps) {
   const { users, params, setParams } = props
 
   return (
-    <form>
-      <div>
+    <Form style={{ marginBottom: '2rem' }} layout="inline">
+      <Form.Item>
         <Input
+          placeholder="项目名"
           type="text"
           value={params?.name}
           onChange={(e) =>
@@ -26,6 +27,8 @@ export default function SearchPanel(props: IProps) {
             })
           }
         />
+      </Form.Item>
+      <Form.Item>
         <Select
           value={params?.personId}
           onChange={(value) =>
@@ -44,7 +47,7 @@ export default function SearchPanel(props: IProps) {
             )
           })}
         </Select>
-      </div>
-    </form>
+      </Form.Item>
+    </Form>
   )
 }
