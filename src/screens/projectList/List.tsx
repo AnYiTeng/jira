@@ -1,14 +1,14 @@
 import { IUser, IList } from './index'
 import { Table } from 'antd'
+import { TableProps } from 'antd/es/table'
 import dayjs from 'dayjs'
 
-interface IProps {
+interface IProps extends TableProps<IList> {
   users: IUser[]
-  list: IList[]
 }
 
 export default function List(props: IProps) {
-  const { users, list } = props
+  const { users } = props
 
   return (
     <Table
@@ -47,7 +47,7 @@ export default function List(props: IProps) {
           },
         },
       ]}
-      dataSource={list}
+      {...props}
     />
   )
 }

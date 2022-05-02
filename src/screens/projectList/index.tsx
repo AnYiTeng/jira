@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { cleanObject, useMount, useDebounce } from 'utils'
+import { useState } from 'react'
+import { useMount, useDebounce } from 'utils'
 import List from './List'
 import SearchPanel from './SearchPanel'
 import styled from '@emotion/styled'
 import { useHttp } from 'utils/http'
+import { useProject } from 'utils/use-project'
+import { Typography } from 'antd'
 
 export interface IUser {
   id: string
@@ -27,15 +29,9 @@ export default function ProjectListScreen() {
     name: '',
     personId: '',
   })
-  const [list, setList] = useState<IList[]>([])
   const debounceParams = useDebounce(params, 500)
   const client = useHttp()
-
-  useEffect(() => {
-    client('projects', { data: cleanObject(debounceParams) }).then((res) => {
-      setList(res)
-    })
-  }, [debounceParams])
+  const { isLoadig, error, data: list } = useProject(debounceParams)
 
   useMount(() => {
     client('users').then((res) => {
@@ -47,7 +43,10 @@ export default function ProjectListScreen() {
     <Container>
       <h1>项目列表 </h1>
       <SearchPanel users={users} params={params} setParams={setParams} />
-      <List users={users} list={list} />
+      {error ? (
+        <Typography.Text type="danger">{error.message}</Typography.Text>
+      ) : null}
+      <List users={users} loading={isLoadig} dataSource={list || []} />
     </Container>
   )
 }
