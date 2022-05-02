@@ -17,7 +17,6 @@ export const Authenticated = () => {
           <Row>用户</Row>
         </HeaderLeft>
         <HeaderRight>
-          {/* <button onClick={() => logout()}>退出登录</button> */}
           <Dropdown
             overlay={
               <Menu>
