@@ -1,16 +1,22 @@
-import React from "react";
-import logo from "./logo.svg";
-import { UnAuthenticated } from "unauthenticated-app";
-import { Authenticated } from "authenticated-app";
-import { useAuth } from "context/auth-context";
-import "./App.css";
+import React from 'react'
+import logo from './logo.svg'
+import { UnAuthenticated } from 'unauthenticated-app'
+import { Authenticated } from 'authenticated-app'
+import { useAuth } from 'context/auth-context'
+import { ErrorBoundary } from 'components/error-boundary'
+import { FullPageErrorFallback } from 'components/lib'
+import './App.css'
 
 function App() {
-  const { user } = useAuth();
+  const { user } = useAuth()
 
   return (
-    <div className="App">{user ? <Authenticated /> : <UnAuthenticated />}</div>
-  );
+    <div className="App">
+      <ErrorBoundary fallbackRender={FullPageErrorFallback}>
+        {user ? <Authenticated /> : <UnAuthenticated />}
+      </ErrorBoundary>
+    </div>
+  )
 }
 
-export default App;
+export default App

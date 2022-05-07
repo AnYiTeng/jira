@@ -3,6 +3,8 @@ import { IUser } from 'screens/projectList/index'
 import * as auth from 'auth-provider'
 import { http } from 'utils/http'
 import { useMount } from 'utils'
+import { useAsync } from 'utils/use-async'
+import { FullPageLoading, FullPageErrorFallback } from 'components/lib'
 
 interface IAuthForm {
   username: string
@@ -31,15 +33,31 @@ const bootstrapUser = async () => {
 }
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<IUser | null>(null)
+  const {
+    data: user,
+    error,
+    isLoadig,
+    isIdle,
+    isError,
+    run,
+    setDate: setUser,
+  } = useAsync<IUser | null>()
 
   const login = (form: IAuthForm) => auth.login(form).then(setUser)
   const register = (form: IAuthForm) => auth.register(form).then(setUser)
   const logout = () => auth.logout().then(() => setUser(null))
 
   useMount(() => {
-    bootstrapUser().then(setUser)
+    run(bootstrapUser())
   })
+
+  if (isIdle || isLoadig) {
+    return <FullPageLoading />
+  }
+
+  if (isError) {
+    return <FullPageErrorFallback error={error} />
+  }
 
   return (
     <AuthContext.Provider
