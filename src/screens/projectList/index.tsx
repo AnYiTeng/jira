@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 import { useHttp } from 'utils/http'
 import { useProject } from 'utils/use-project'
 import { Typography } from 'antd'
-import { Helmet } from 'react-helmet'
+import { useDocumentTitle } from 'utils/index'
 export interface IUser {
   id: string
   name: string
@@ -33,6 +33,8 @@ export default function ProjectListScreen() {
   const client = useHttp()
   const { isLoadig, error, data: list } = useProject(debounceParams)
 
+  useDocumentTitle('项目列表', false)
+
   useMount(() => {
     client('users').then((res) => {
       setUsers(res)
@@ -41,9 +43,6 @@ export default function ProjectListScreen() {
 
   return (
     <Container>
-      <Helmet>
-        <title>项目列表</title>
-      </Helmet>
       <h1>项目列表 </h1>
       <SearchPanel users={users} params={params} setParams={setParams} />
       {error ? (

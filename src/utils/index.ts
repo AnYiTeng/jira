@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export const isFalse = (value: unknown) => (value === 0 ? true : !!value)
 
@@ -61,4 +61,21 @@ export const useArray = <T>(param: T[]) => {
     clear,
     value: list,
   }
+}
+
+// 改变文档标题
+export const useDocumentTitle = (title: string, keepOnUnmount?: boolean) => {
+  const oldTitle = useRef(document.title).current
+
+  useEffect(() => {
+    document.title = title
+  }, [title])
+
+  useEffect(() => {
+    return () => {
+      if (!keepOnUnmount) {
+        document.title = oldTitle
+      }
+    }
+  }, [keepOnUnmount, oldTitle])
 }
