@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 import { useHttp } from 'utils/http'
 import { useProject } from 'utils/use-project'
 import { Typography } from 'antd'
-
+import { Helmet } from 'react-helmet'
 export interface IUser {
   id: string
   name: string
@@ -41,6 +41,9 @@ export default function ProjectListScreen() {
 
   return (
     <Container>
+      <Helmet>
+        <title>项目列表</title>
+      </Helmet>
       <h1>项目列表 </h1>
       <SearchPanel users={users} params={params} setParams={setParams} />
       {error ? (
