@@ -26,7 +26,7 @@ export default function LoginView({
     <Form onFinish={handleSubmit}>
       <Form.Item
         name={'username'}
-        rules={[{ required: true, message: '请输入用户名' }]}
+        rules={[{ required: true, message: '请输入用户名:' }]}
       >
         <Input placeholder="请输入用户名" type="text" id={'username'} />
       </Form.Item>
